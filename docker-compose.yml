@@ -1,0 +1,13 @@
+services:
+  insight:
+    image: python
+    container_name: "traffix"
+    volumes:
+    - ./:/root/app
+    ports:
+    - "5555:5000"
+    restart: always
+    working_dir: /root/app
+
+    command: >
+      bash -c "pip install flask gunicorn gevent wtforms sklearn pandas matplotlib sqlalchemy sqlalchemy_utils psycopg2 networkx && gunicorn --worker-class gevent -w 1 -b 0.0.0.0:5000 app:app  --keep-alive 60 --reload"

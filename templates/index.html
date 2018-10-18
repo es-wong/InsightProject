@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+{% from "_formhelpers.html" import render_field %}
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Fontastic Four</title>
+
+    <!-- <link rel="stylesheet" href="{{url_for('static', filename='jquery.typeahead.css')}}" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../static/easy-autocomplete.min.css">
+
+
+    <script src="{{url_for('static', filename='jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='jquery.easy-autocomplete.js') }}"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- <script src="{{url_for('static', filename='jquery.typeahead.js')}}"  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqGxyKiZ6OW/JmZQ5stwEULTy" ></script> -->
+
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Fontastic Four</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">about</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">slides</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+          <div class="row">
+
+      <center>
+        <div class="container" align = "center">
+          <!-- <div class="starter-template"> -->
+          <!-- <div class="row"> -->
+            <!-- <div class="column" style="width:40%;"> -->
+            <h3>Font Palettes on Demand</h3>
+            <p>This project was completed in three weeks as part of the Insight Data Science Fellowship.</p>
+            <p>Fontastic Four is a tool designed to help burgeoning graphic designers select stylistically consistent font palattes.</p>
+            <p>Recommendations for font pairings are provided based on a blend of similar and contrasting features of fonts in the Google Font library.</p>
+            <!-- <p> via deep learning techniques.</p> -->
+            <p><br> For more information, <a href="/slides">see the slides.</a></p>
+          <!-- </div> -->
+        </div>
+      </center>
+      <div class="container-fluid" align="center">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="card">
+              <!-- <div class="column" style="width:30%;"> -->
+              <img class="card-img-top" src="{{url_for('static', filename='goodFonts.png')}}" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text">Good font pairings blend similarity and contrast.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="card" >
+              <img class="card-img-top" src="{{url_for('static', filename='badFont.png')}}" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text">Bad font pairings are either too similar or vastly different.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message[1] }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <center>
+        <form>
+    <!-- <div class="typeahead__container">
+        <div class="typeahead__field">
+            <div class="typeahead__query">
+                <input class="js-typeahead"
+                       name="q"
+                       type="search"
+                       autocomplete="off">
+            </div>
+            <div class="typeahead__button">
+                <button type="submit">
+                    <span class="typeahead__search-icon"></span>
+                </button>
+            </div>
+        </div> -->
+    </div>
+</form>
+
+        <form action="/" method="post">
+            {{ form.csrf }}
+
+
+            <div class="container">
+                <div class="row">
+          <center>
+          <div class="input text">
+          <!-- <div class="input text" style="width:100%;padding-left:100px"> -->
+          <div class="input text" style="width:100%">
+                Input a Google Font Family: {{ form.fontname }}
+            </div>
+
+            <div class="input submit">
+                <input type="submit" value="Submit" />
+            </div>
+          </center>
+          <script>
+          var options = {
+              data: {{fullNames|tojson}},
+              list: {
+                  match: {
+                      enabled: true
+                  }
+              },
+          };
+          $("#fontname").easyAutocomplete(options);
+          </script>
+        </form>
+      </center>
+      <!-- </center> -->
+
+
+    <!-- Bootstrap core JavaScript -->
+
+  </body>
+
+</html>

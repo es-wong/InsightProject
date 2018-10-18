@@ -1,0 +1,26 @@
+<script>
+var imgs_json = {{imgs|tojson}};
+var img_parsed = JSON.parse(imgs_json)
+// document.getElementById("message").innerHTML = imgparsed[1];
+
+
+var names_json = {{names|tojson}};
+var names_json_parsed = JSON.parse(names_json)
+// document.getElementById("message2").innerHTML = names_json_parsed[1];
+
+var scores_json = {{scores|tojson}};
+var scores_json_parsed = JSON.parse(scores_json)
+// document.getElementById("message3").innerHTML = scores_json_parsed[1];
+
+var i;
+for ( i = 0; i < names_json_parsed.length; i++) {
+  document.getElementById("tabletest_r"+(i+1) + "c1").innerHTML = names_json_parsed[i];
+  document.getElementById("tabletest_r"+(i+1) + "c2").innerHTML = scores_json_parsed[i];
+  var currentimg = document.getElementById("r"+(i+1) + "c3");
+  currentimg.src = "{{url_for('static', filename = img_parsed[i] )}}";
+
+  }
+
+
+
+</script>
